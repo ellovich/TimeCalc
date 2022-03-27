@@ -1,0 +1,16 @@
+﻿<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:TimeCalc" 
+             x:Class="TimeCalc.App" Name="My App">
+    <Application.DataTemplates>
+        <local:ViewLocator/>
+    </Application.DataTemplates>
+
+    <Application.Styles>
+      <FluentTheme Mode="Dark" />
+      <StyleInclude Source="/Styles/Styles.xaml" />
+      <StyleInclude Source="/Styles/SideBar.xaml" />
+      <StyleInclude Source="/Styles/FluentDataGrid.xaml" />
+      <StyleInclude Source="/Styles/Icons.xaml" />
+    </Application.Styles>
+</Application>

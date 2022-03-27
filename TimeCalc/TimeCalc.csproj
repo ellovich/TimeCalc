@@ -1,0 +1,90 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AssemblyName>TimeCalc</AssemblyName>
+    <RootNamespace>TimeCalc</RootNamespace>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Compile Update="**\*.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <AvaloniaResource Include="**\*.xaml">
+      <SubType>Designer</SubType>
+    </AvaloniaResource>
+    <AvaloniaResource Include="Assets\**" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <AvaloniaResource Remove="Styles\Icons.xaml" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Remove="Styles\Icons.xaml" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <AvaloniaXaml Include="Styles\FluentDataGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+    <AvaloniaXaml Include="Styles\Icons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="0.10.12" />
+    <PackageReference Include="Avalonia.Diagnostics" Version="0.10.11" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.12" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="ReactiveUI" Version="17.1.17" />
+    <PackageReference Include="ReactiveUI.Fody" Version="17.1.17" />
+   </ItemGroup>
+  
+  <ItemGroup>
+    <AvaloniaResource Update="Assets\TimeCalcIcon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </AvaloniaResource>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Compile Update="Views\Steps\Step06\Step06Page.axaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Steps\Step03\Step03Page.axaml.cs">
+      <DependentUpon>Step03Page.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Steps\Step07\Step07Page.axaml.cs">
+      <DependentUpon>Step07Page.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Steps\Step02\Step02Table.axaml.cs">
+      <DependentUpon>Step02Table.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Steps\Step02\Step02Page.axaml.cs">
+      <DependentUpon>Step02Page.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\StartUpWindow.axaml.cs">
+      <DependentUpon>StartUpWindow.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Steps\Step11\Step11Page.axaml.cs">
+      <DependentUpon>Step11Page.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Steps\Step12\Step12Page.axaml.cs">
+      <DependentUpon>Step12Page.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Steps\Step14\Step14Page.axaml.cs">
+      <DependentUpon>Step14Page.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Update="Infrastructure\report_beta.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

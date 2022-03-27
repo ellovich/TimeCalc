@@ -1,0 +1,57 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="TimeCalc.Views.StartUpWindow"
+        Title="StartUpWindow">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+    
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Column="1" Grid.Row="1"
+            FontSize="26" FontWeight="DemiBold">
+            Недавние проекты
+        </TextBlock>
+
+        <TabControl Grid.Column="1" Grid.Row="2" Grid.RowSpan="4"
+                    Classes="sidebar" >
+            <TabItem Header="20711"> </TabItem>
+            <TabItem Header="20712"> </TabItem>
+            <TabItem Header="20713"> </TabItem>
+            <TabItem Header="20714"> </TabItem>
+            <TabItem Header="20715"> </TabItem>
+        </TabControl>
+
+        <Button Grid.Column="3" Grid.Row="2" Height="100" Width="200"
+                Margin="20"
+                VerticalContentAlignment="Center"
+                HorizontalContentAlignment="Center">
+            Открыть через проводник
+        </Button>
+
+        <Button Grid.Column="3" Grid.Row="3" Height="100" Width="200"
+                Margin="20"
+                VerticalContentAlignment="Center"
+                HorizontalContentAlignment="Center">
+            Создать проект
+        </Button>
+    </Grid>
+</Window>

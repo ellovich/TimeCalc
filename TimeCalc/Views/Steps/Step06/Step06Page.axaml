@@ -1,0 +1,57 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:TimeCalc.ViewModels"
+             xmlns:timeCalc="clr-namespace:TimeCalc"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="TimeCalc.Views.Steps06Page">
+
+    <DockPanel Margin="{StaticResource PageMargin}" Background="Transparent">
+
+        <Grid DockPanel.Dock="Top"
+              ColumnDefinitions="50, 300, 300, auto"
+              RowDefinitions="auto, auto, auto, auto, auto, auto, auto, auto, auto">
+            
+            <TextBlock Grid.Column="0" Grid.Row="0" Margin="15" Text="n_ЛТ"/>
+            <TextBlock Grid.Column="1" Grid.Row="0" Margin="15" Text="Кол-во листов текста:"/>
+            <NumericUpDown Grid.Column="2" Grid.Row="0" Classes="count" VerticalAlignment="Center" Value="{Binding Step.N_лт }"/>
+
+            <TextBlock Grid.Column="0" Grid.Row="1" Margin="15" Text="n_Рис"/>
+            <TextBlock Grid.Column="1" Grid.Row="1" Margin="15" Text="Кол-во рисунков:"/>
+            <NumericUpDown Grid.Column="2" Grid.Row="1" Classes="count" VerticalAlignment="Center" Value="{Binding Step.N_рис }"/>
+
+            <TextBlock Grid.Column="0" Grid.Row="2" Margin="15" Text="n_ЛТаб"/>
+            <TextBlock Grid.Column="1" Grid.Row="2" Margin="15" Text="Кол-во листов таблиц:"/>
+            <NumericUpDown Grid.Column="2" Grid.Row="2" Classes="count" VerticalAlignment="Center" Value="{Binding Step.N_лтаб }"/>
+
+            <TextBlock Grid.Column="0" Grid.Row="3" Margin="15" Text="n_ЧС"/>
+            <TextBlock Grid.Column="1" Grid.Row="3" Margin="15" Text="Кол-во чертежей (схем):"/>
+            <NumericUpDown Grid.Column="2" Grid.Row="3" Classes="count" VerticalAlignment="Center" Value="{Binding Step.N_чс }"/>
+
+            <TextBlock Grid.Column="0" Grid.Row="4" Margin="15" Text="n_Д"/>
+            <TextBlock Grid.Column="1" Grid.Row="4" Margin="15" Text="Кол-во документов:"/>
+            <NumericUpDown Grid.Column="2" Grid.Row="4" Classes="count" VerticalAlignment="Center" Value="{Binding Step.N_д }"/>
+
+            <TextBlock Grid.Column="0" Grid.Row="5" Margin="15" Text="k_Нов"/>
+            <TextBlock Grid.Column="1" Grid.Row="5" Margin="15" Text="Степень корректировки:"/>
+            <ComboBox Grid.Column="2" Grid.Row="5"
+                      VerticalAlignment="Center"
+                      Classes="correction" Items="{x:Static timeCalc:Step06.s_Corrections_6_2}"
+                      SelectedItem="{Binding Step.Correction}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}" ToolTip.Tip="{Binding Coef}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </Grid>
+        
+        <StackPanel Orientation="Horizontal" Spacing="30"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom">
+            <Button Classes="cancel" Command="{Binding DeleteStepCmd}" Content="Удалить этап"/>
+        </StackPanel>
+        
+    </DockPanel>
+</UserControl>

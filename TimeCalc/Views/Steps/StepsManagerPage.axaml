@@ -1,0 +1,66 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:c="clr-namespace:Avalonia.Controls;assembly=Avalonia.Controls"
+             xmlns:viewModels="clr-namespace:TimeCalc.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="500"
+             x:Class="TimeCalc.Views.StepsManagerPage">
+    <Design.DataContext><viewModels:StepsManagerPageViewModel /></Design.DataContext>
+    <Control.DataContext><viewModels:StepsManagerPageViewModel /></Control.DataContext>
+    
+    <DockPanel Margin="{StaticResource PageMargin}" Background="Transparent">
+
+        <DataGrid Classes="common"
+                  DockPanel.Dock="Top"
+                  Name="DgvSteps"
+                  Items="{Binding StepsManager.DoneSteps, Mode=TwoWay}">
+
+            <DataGrid.Columns>
+          
+                    <DataGridTemplateColumn Header="N" Width="auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Classes="read" Text="{Binding MethodicId}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="Наименование работы" Width="*" MinWidth="300">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Classes="read l" 
+                                         HorizontalAlignment="Stretch"
+                                         ToolTip.Tip="{Binding OrigName}"
+                                         Text="{Binding Name}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="Трудоемкость" Width="auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Classes="read" Text="{Binding Labor}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+        </DataGrid>
+
+        <!--<TextBlock DockPanel.Dock="Top" 
+                   FontSize="18"
+                   Text="{Binding StepsManager.FullLabor, StringFormat=Общая трудоёмкость: {0}}">
+        </TextBlock>-->
+
+        <Button DockPanel.Dock="Top"
+                HorizontalAlignment="Center"
+                Classes="add"
+                Command="{ Binding ChooseStepCmd }" 
+                CommandParameter="{Binding $parent[Window] }">
+            Добавить этап
+        </Button> 
+
+
+    </DockPanel>
+
+</UserControl>

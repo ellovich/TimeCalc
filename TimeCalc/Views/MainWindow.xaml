@@ -1,0 +1,58 @@
+﻿<controls:FluentWindow xmlns="https://github.com/avaloniaui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                       xmlns:controls="clr-namespace:Avalonia.Controls"
+                       xmlns:views="clr-namespace:TimeCalc.Views"
+                       xmlns:viewModels="clr-namespace:TimeCalc.ViewModels"
+                       mc:Ignorable="d" d:DesignWidth="1350" d:DesignHeight="700" 
+                       x:Class="TimeCalc.Views.MainWindow"
+
+                       FontFamily="Tahoma"
+                       Background="Transparent"
+                       Width="1280" Height="720"
+                       WindowStartupLocation="CenterScreen"
+                       Icon="/Assets/TimeCalcIcon.ico"
+                       Title ="{Binding StepsManager.ProjName, StringFormat='TimeCalc: {0}' }">
+
+  <Design.DataContext>
+      <viewModels:MainWindowViewModel/>
+  </Design.DataContext>
+
+  <DockPanel LastChildFill="True">
+
+        <Menu DockPanel.Dock="Top" Background="#222222">
+
+            <MenuItem Header="Проект">
+                <MenuItem Header="Новый проект" InputGesture="CTRL + N" Command="{Binding NewCmd}"/>
+                <MenuItem Header="Открыть проект" InputGesture="CTRL + O" Command="{Binding OpenCmd}"/>
+                <Separator />
+                <MenuItem Header="Сохранить" InputGesture="CTRL + S" Command="{Binding SaveCmd}"/>
+                <Separator />
+                <MenuItem Header="Выход" InputGesture="Alt + F4" Command="{Binding ExitCmd}"/>
+            </MenuItem>
+
+            <MenuItem Header="Опции">
+                <MenuItem Header="Экспорт">
+                <MenuItem Header="HTML" Command="{Binding ExportToHtmlCmd}"/>
+                <MenuItem Header="Excel" Command="{Binding ExportToExcelCmd}"/>
+            </MenuItem>
+
+            <MenuItem Header="Помощь" InputGesture="Ctrl+H" Command="{Binding MailMeCmd }">
+                <MenuItem.Icon>
+                    <Image Source="/Assets/person_clock2.ico"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+
+            <!--<MenuItem Header="Настройки">
+                <MenuItem Header="Размер шрифта">
+                    <TextBox Text="{Binding $parent[Window].FontSize }"/>
+                </MenuItem>
+            </MenuItem>-->
+        </Menu>
+
+        <views:MainView/>
+
+    </DockPanel>
+</controls:FluentWindow>

@@ -1,0 +1,1223 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:TimeCalc.ViewModels"
+             xmlns:timeCalc="clr-namespace:TimeCalc"
+             xmlns:views="clr-namespace:TimeCalc.Views"
+             mc:Ignorable="d" d:DesignWidth="1080" d:DesignHeight="800"
+             x:Class="TimeCalc.Views.Steps03Page">
+
+    <DockPanel Margin="{StaticResource PageMargin}" Background="Transparent">
+
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Spacing="20">
+
+            <CheckBox Margin="10"
+                      IsChecked="{Binding Step.IsT_К}">
+                <TextBox Classes="h" TextWrapping="NoWrap">T_K (t₁-t₇)</TextBox>
+            </CheckBox>
+
+            <CheckBox Margin="10"
+                      IsChecked="{Binding Step.IsT_ВО}">
+                <TextBox Classes="h" TextWrapping="NoWrap">T_ВО (t₈-t₁₀)</TextBox>
+            </CheckBox>
+
+            <CheckBox Margin="10"
+                      IsChecked="{Binding Step.IsT_БЖ}">
+                <TextBox Classes="h" TextWrapping="NoWrap">T_БЖ  (t₁₁-t₂₅)</TextBox>
+            </CheckBox>
+        </StackPanel>
+
+        <TabControl DockPanel.Dock="Top" HorizontalAlignment="Left">
+
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock>в части непотопляемости</TextBlock>
+                </TabItem.Header>
+
+                <StackPanel Spacing="15">
+                    
+                    <!--t1-->
+                    <Border Background="#303030"
+                            BorderBrush="#303030"
+                            Padding="15, 0, 15, 10"
+                            MaxWidth="1000"
+                            HorizontalAlignment="Stretch"
+                            Margin="0,15,0,0"
+                            BorderThickness="0"
+                            CornerRadius="10">
+
+                        <Grid DockPanel.Dock="Top"
+                              HorizontalAlignment="Stretch"
+                              ColumnDefinitions="100, *, *, auto"
+                              RowDefinitions="auto, auto, auto, auto, auto, auto, auto, auto, auto">
+
+                            <CheckBox Grid.Column="0" Grid.Row="0"
+                                      Name ="CheckBox1"
+                                      Checked="ToggleButton_OnChecked"
+                                      Unchecked="ToggleButton_OnUnchecked"
+                                      IsChecked="{Binding Step.IsT1}">
+                                <TextBox Classes="h">t₁</TextBox>
+                            </CheckBox>
+
+                            <TextBox Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3"
+                                     Margin="15, 10, 15, 15"
+                                     Classes="h"
+                                     Text="{x:Static timeCalc:Step03.T1}"/>
+
+                            <TextBlock Grid.Column="0" Grid.Row="1" Margin="10" TextWrapping="Wrap" Text="n_пш"/>
+                            <TextBlock Grid.Column="1" Grid.Row="1" Margin="10" TextWrapping="Wrap" Text="Кол-во шпангоутов корпуса корабля:"/>
+                            <NumericUpDown Grid.Column="2" Grid.Row="1" Classes="count" VerticalAlignment="Center" Value="{Binding Step.N_пш }"/>
+
+                            <TextBlock Grid.Column="0" Grid.Row="2" Margin="10" TextWrapping="Wrap" Text="k_1"/>
+                            <TextBlock Grid.Column="1" Grid.Row="2" Margin="10" TextWrapping="Wrap" Text="Степень сложности геометрии обводов корпуса:"/>
+                            <ComboBox Grid.Column="2" Grid.Row="2"
+                                      VerticalAlignment="Center"
+                                      Classes="correction" Items="{x:Static timeCalc:Step03.s_Corrections3_4_1}"
+                                      SelectedItem="{Binding Step.K1}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" ToolTip.Tip="{Binding Coef}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+
+                            <TextBlock Grid.Column="0" Grid.Row="3" Margin="10" TextWrapping="Wrap" Text="k_нов"/>
+                            <TextBlock Grid.Column="1" Grid.Row="3" Margin="10" TextWrapping="Wrap" Text="Коэффициент новизны работы:"/>
+                            <ComboBox Grid.Column="2" Grid.Row="3"
+                                      VerticalAlignment="Center"
+                                      Classes="correction" Items="{x:Static timeCalc:Step03.s_Corrections3_6}"
+                                      SelectedItem="{Binding Step.K_нов_1}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" ToolTip.Tip="{Binding Coef}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </Grid>
+                    </Border>
+
+                    <!--t2-->
+                    <Border Background="#303030"
+                            BorderBrush="#303030"
+                            Padding="15, 0, 15, 10"
+                            MaxWidth="1000"
+                            HorizontalAlignment="Stretch"
+                            BorderThickness="0"
+                            CornerRadius="10">
+
+                        <Grid DockPanel.Dock="Top"
+                              HorizontalAlignment="Stretch"
+                              ColumnDefinitions="100, *, *, auto"
+                              RowDefinitions="auto, auto, auto, auto, auto, auto, auto, auto, auto">
+
+                            <CheckBox Grid.Column="0" Grid.Row="0"
+                                      Name ="CheckBox2"
+                                      Checked="ToggleButton_OnChecked"
+                                      Unchecked="ToggleButton_OnUnchecked"
+                                      IsChecked="{Binding Step.IsT2}">
+                                <TextBox Classes="h">t₂</TextBox>
+                            </CheckBox>
+
+                            <TextBox Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3"
+                                     Margin="15, 10, 15, 15"
+                                     Classes="h"
+                                     Text="{x:Static timeCalc:Step03.T2}"/>
+
+                            <TextBlock Grid.Column="0" Grid.Row="1" Margin="10" TextWrapping="Wrap" Text="n_пал"/>
+                            <TextBlock Grid.Column="1" Grid.Row="1" Margin="10" TextWrapping="Wrap" Text="Кол-во палуб и ярусов надстройки:"/>
+                            <NumericUpDown Grid.Column="2" Grid.Row="1" Classes="count" VerticalAlignment="Center" Value="{Binding Step.N_пал }"/>
+
+                            <!--<TextBlock Grid.Column="0" Grid.Row="2" Margin="10" TextWrapping="Wrap" Text="k_2"/>
+                            <TextBlock Grid.Column="1" Grid.Row="2" Margin="10" TextWrapping="Wrap" Text="Количество палуб и ярусов настройки:"/>
+                            <ComboBox Grid.Column="2" Grid.Row="2"
+                                      VerticalAlignment="Center"
+                                      Classes="correction" Items="{ x:Static timeCalc:Step03.s_Corrections3_4_2 }"
+                                      SelectedItem="{Binding Step.K2}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" ToolTip.Tip="{Binding Coef}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>-->
+
+                            <TextBlock Grid.Column="0" Grid.Row="3" Margin="10" TextWrapping="Wrap" Text="k_нов"/>
+                            <TextBlock Grid.Column="1" Grid.Row="3" Margin="10" TextWrapping="Wrap" Text="Коэффициент новизны работы:"/>
+                            <ComboBox Grid.Column="2" Grid.Row="3"
+                                      VerticalAlignment="Center"
+                                      Classes="correction" Items="{x:Static timeCalc:Step03.s_Corrections3_6}"
+                                      SelectedItem="{Binding Step.K_нов_2}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" ToolTip.Tip="{Binding Coef}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </Grid>
+                    </Border>
+
+                    <!--t3-->
+                    <Border Background="#303030"
+                            BorderBrush="#303030"
+                            Padding="15, 0, 15, 10"
+                            MaxWidth="1000"
+                            HorizontalAlignment="Stretch"
+                            BorderThickness="0"
+                            CornerRadius="10">
+
+                        <Grid DockPanel.Dock="Top"
+                              HorizontalAlignment="Stretch"
+                              ColumnDefinitions="100, *, *, auto"
+                              RowDefinitions="auto, auto, auto, auto, auto, auto, auto, auto, auto">
+
+                            <CheckBox Grid.Column="0" Grid.Row="0"
+                                      Name ="CheckBox3"
+                                      Checked="ToggleButton_OnChecked"
+                                      Unchecked="ToggleButton_OnUnchecked"
+                                      IsChecked="{Binding Step.IsT3}">
+                                <TextBox Classes="h">t₃</TextBox>
+                            </CheckBox>
+
+                            <TextBox Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3"
+                                     Margin="15, 10, 15, 15"
+                                     Classes="h"
+                                     Text="{x:Static timeCalc:Step03.T3}"/>
+
+                            <TextBlock Grid.Column="0" Grid.Row="2" Margin="10" TextWrapping="Wrap" Text="k_3"/>
+                            <TextBlock Grid.Column="1" Grid.Row="2" Margin="10" TextWrapping="Wrap" Text="Количество выступающих частей:"/>
+                            <ComboBox Grid.Column="2" Grid.Row="2"
+                                      VerticalAlignment="Center"
+                                      Classes="correction" Items="{x:Static timeCalc:Step03.s_Corrections3_4_3}"
+                                      SelectedItem="{Binding Step.K3}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" ToolTip.Tip="{Binding Coef}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+
+                            <TextBlock Grid.Column="0" Grid.Row="3" Margin="10" TextWrapping="Wrap" Text="k_нов"/>
+                            <TextBlock Grid.Column="1" Grid.Row="3" Margin="10" TextWrapping="Wrap" Text="Коэффициент новизны работы:"/>
+                            <ComboBox Grid.Column="2" Grid.Row="3"
+                                      VerticalAlignment="Center"
+                                      Classes="correction" Items="{x:Static timeCalc:Step03.s_Corrections3_6}"
+                                      SelectedItem="{Binding Step.K_нов_3}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" ToolTip.Tip="{Binding Coef}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </Grid>
+                    </Border>
+
+                    <!--t4-->
+                    <Border Background="#303030"
+                            BorderBrush="#303030"
+                            Padding="15, 0, 15, 10"
+                            MaxWidth="1000"
+                            HorizontalAlignment="Stretch"
+                            BorderThickness="0"
+                            CornerRadius="10">
+
+                        <Grid DockPanel.Dock="Top"
+                              HorizontalAlignment="Stretch"
+                              ColumnDefinitions="100, *, *, auto"
+                              RowDefinitions="auto, auto, auto, auto, auto, auto, auto, auto, auto">
+
+                            <CheckBox Grid.Column="0" Grid.Row="0"
+                                      Name ="CheckBox4"
+                                      Checked="ToggleButton_OnChecked"
+                                      Unchecked="ToggleButton_OnUnchecked"
+                                      IsChecked="{Binding Step.IsT4}">
+                                <TextBox Classes="h">t₄</TextBox>
+                            </CheckBox>
+
+                            <TextBox Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3"
+                                     Margin="15, 10, 15, 15"
+                                     Classes="h"
+                                     Text="{x:Static timeCalc:Step03.T4}"/>
+
+                            <TextBlock Grid.Column="0" Grid.Row="3" Margin="10" TextWrapping="Wrap" Text="k_нов"/>
+                            <TextBlock Grid.Column="1" Grid.Row="3" Margin="10" TextWrapping="Wrap" Text="Коэффициент новизны работы:"/>
+                            <ComboBox Grid.Column="2" Grid.Row="3"
+                                      VerticalAlignment="Center"
+                                      Classes="correction" Items="{x:Static timeCalc:Step03.s_Corrections3_6}"
+                                      SelectedItem="{Binding Step.K_нов_4}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" ToolTip.Tip="{Binding Coef}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </Grid>
+                    </Border>
+
+                    <!--t5-->
+                    <Border Background="#303030"
+                            BorderBrush="#303030"
+                            Padding="15, 0, 15, 10"
+                            MaxWidth="1000"
+                            HorizontalAlignment="Stretch"
+                            BorderThickness="0"
+                            CornerRadius="10">
+
+                        <Grid DockPanel.Dock="Top"
+                              HorizontalAlignment="Stretch"
+                              ColumnDefinitions="100, *, *, auto"
+                              RowDefinitions="auto, auto, auto, auto, auto, auto, auto, auto, auto">
+
+                            <CheckBox Grid.Column="0" Grid.Row="0"
+                                      Name ="CheckBox5"
+                                      Checked="ToggleButton_OnChecked"
+                                      Unchecked="ToggleButton_OnUnchecked"
+                                      IsChecked="{Binding Step.IsT5}">
+                                <TextBox Classes="h">t₅</TextBox>
+                            </CheckBox>
+
+                            <TextBox Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3"
+                                     Margin="15, 10, 15, 15"
+                                     Classes="h"
+                                     Text="{x:Static timeCalc:Step03.T5}"/>
+
+                            <TextBlock Grid.Column="0" Grid.Row="3" Margin="10" TextWrapping="Wrap" Text="k_нов"/>
+                            <TextBlock Grid.Column="1" Grid.Row="3" Margin="10" TextWrapping="Wrap" Text="Коэффициент новизны работы:"/>
+                            <ComboBox Grid.Column="2" Grid.Row="3"
+                                      VerticalAlignment="Center"
+                                      Classes="correction" Items="{x:Static timeCalc:Step03.s_Corrections3_6}"
+                                      SelectedItem="{Binding Step.K_нов_5}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" ToolTip.Tip="{Binding Coef}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </Grid>
+                    </Border>
+
+                    <!--t6-->
+                    <Border Background="#303030"
+                            BorderBrush="#303030"
+                            Padding="15, 0, 15, 10"
+                            MaxWidth="1000"
+                            HorizontalAlignment="Stretch"
+                            BorderThickness="0"
+                            CornerRadius="10">
+
+                        <Grid DockPanel.Dock="Top"
+                              HorizontalAlignment="Stretch"
+                              ColumnDefinitions="100, *, *, auto"
+                              RowDefinitions="auto, auto, auto, auto, auto, auto, auto, auto, auto">
+
+                            <CheckBox Grid.Column="0" Grid.Row="0"
+                                      Name ="CheckBox6"
+                                      Checked="ToggleButton_OnChecked"
+                                      Unchecked="ToggleButton_OnUnchecked"
+                                      IsChecked="{Binding Step.IsT6}">
+                                <TextBox Classes="h">t₆</TextBox>
+                            </CheckBox>
+
+                            <TextBox Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3"
+                                     Margin="15, 10, 15, 15"
+                                     Classes="h"
+                                     Text="{x:Static timeCalc:Step03.T6}"/>
+
+                            <TextBlock Grid.Column="0" Grid.Row="3" Margin="10" TextWrapping="Wrap" Text="k_нов"/>
+                            <TextBlock Grid.Column="1" Grid.Row="3" Margin="10" TextWrapping="Wrap" Text="Коэффициент новизны работы:"/>
+                            <ComboBox Grid.Column="2" Grid.Row="3"
+                                      VerticalAlignment="Center"
+                                      Classes="correction" Items="{x:Static timeCalc:Step03.s_Corrections3_6}"
+                                      SelectedItem="{Binding Step.K_нов_6}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" ToolTip.Tip="{Binding Coef}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </Grid>
+                    </Border>
+
+                    <!--t7-->
+                    <Border Background="#303030"
+                            BorderBrush="#303030"
+                            Padding="15, 0, 15, 10"
+                            MaxWidth="1000"
+                            HorizontalAlignment="Stretch"
+                            BorderThickness="0"
+                            CornerRadius="10">
+
+                        <Grid DockPanel.Dock="Top"
+                              HorizontalAlignment="Stretch"
+                              ColumnDefinitions="100, *, *, auto"
+                              RowDefinitions="auto, auto, auto, auto, auto, auto, auto, auto, auto">
+
+                            <CheckBox Grid.Column="0" Grid.Row="0"
+                                      Name ="CheckBox7"
+                                      Checked="ToggleButton_OnChecked"
+                                      Unchecked="ToggleButton_OnUnchecked"
+                                      IsChecked="{Binding Step.IsT7}">
+                                <TextBox Classes="h">t₇</TextBox>
+                            </CheckBox>
+
+                            <TextBox Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3"
+                                     Margin="15, 10, 15, 15"
+                                     Classes="h"
+                                     Text="{x:Static timeCalc:Step03.T7}"/>
+
+                            <TextBlock Grid.Column="0" Grid.Row="2" Margin="10" TextWrapping="Wrap" Text="k_7"/>
+                            <TextBlock Grid.Column="1" Grid.Row="2" Margin="10" TextWrapping="Wrap" Text="Вид, номенклатура, расположение и масса возимых грузов:"/>
+                            <ComboBox Grid.Column="2" Grid.Row="2"
+                                      VerticalAlignment="Center"
+                                      Classes="correction" Items="{x:Static timeCalc:Step03.s_Corrections3_4_4}"
+                                      SelectedItem="{Binding Step.K7}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" ToolTip.Tip="{Binding Coef}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+
+                            <TextBlock Grid.Column="0" Grid.Row="3" Margin="10" TextWrapping="Wrap" Text="k_нов"/>
+                            <TextBlock Grid.Column="1" Grid.Row="3" Margin="10" TextWrapping="Wrap" Text="Коэффициент новизны работы:"/>
+                            <ComboBox Grid.Column="2" Grid.Row="3"
+                                      VerticalAlignment="Center"
+                                      Classes="correction" Items="{x:Static timeCalc:Step03.s_Corrections3_6}"
+                                      SelectedItem="{Binding Step.K_нов_7}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" ToolTip.Tip="{Binding Coef}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </Grid>
+                    </Border>
+
+
+
+                    <!--t8-->
+                    <Border Background="#303030"
+                            BorderBrush="#303030"
+                            Padding="15, 0, 15, 10"
+                            MaxWidth="1000"
+                            HorizontalAlignment="Stretch"
+                            BorderThickness="0"
+                            CornerRadius="10">
+
+                        <Grid DockPanel.Dock="Top"
+                              HorizontalAlignment="Stretch"
+                              ColumnDefinitions="100, *, *, auto"
+                              RowDefinitions="auto, auto, auto, auto, auto, auto, auto, auto, auto">
+
+                            <CheckBox Grid.Column="0" Grid.Row="0"
+                                      Name ="CheckBox8"
+                                      Checked="ToggleButton_OnChecked"
+                                      Unchecked="ToggleButton_OnUnchecked"
+                                      IsChecked="{Binding Step.IsT8}">
+                                <TextBox Classes="h">t₈</TextBox>
+                            </CheckBox>
+
+                            <TextBox Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3"
+                                     Margin="15, 10, 15, 15"
+                                     Classes="h"
+                                     Text="{x:Static timeCalc:Step03.T8}"/>
+
+                            <TextBlock Grid.Column="0" Grid.Row="2" Margin="10" TextWrapping="Wrap" Text="k_8"/>
+                            <TextBlock Grid.Column="1" Grid.Row="2" Margin="10" TextWrapping="Wrap" Text="Вид, номенклатура, расположение и масса возимых грузов:"/>
+                            <ComboBox Grid.Column="2" Grid.Row="2"
+                                      VerticalAlignment="Center"
+                                      Classes="correction" Items="{x:Static timeCalc:Step03.s_Corrections3_4_5}"
+                                      SelectedItem="{Binding Step.K8}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" ToolTip.Tip="{Binding Coef}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+
+                            <TextBlock Grid.Column="0" Grid.Row="3" Margin="10" TextWrapping="Wrap" Text="k_нов"/>
+                            <TextBlock Grid.Column="1" Grid.Row="3" Margin="10" TextWrapping="Wrap" Text="Коэффициент новизны работы:"/>
+                            <ComboBox Grid.Column="2" Grid.Row="3"
+                                      VerticalAlignment="Center"
+                                      Classes="correction" Items="{x:Static timeCalc:Step03.s_Corrections3_6}"
+                                      SelectedItem="{Binding Step.K_нов_8}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" ToolTip.Tip="{Binding Coef}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </Grid>
+                    </Border>
+
+                    <!--t9-->
+                    <Border Background="#303030"
+                            BorderBrush="#303030"
+                            Padding="15, 0, 15, 10"
+                            MaxWidth="1000"
+                            HorizontalAlignment="Stretch"
+                            BorderThickness="0"
+                            CornerRadius="10">
+
+                        <Grid DockPanel.Dock="Top"
+                              HorizontalAlignment="Stretch"
+                              ColumnDefinitions="100, *, *, auto"
+                              RowDefinitions="auto, auto, auto, auto, auto, auto, auto, auto, auto">
+
+                            <CheckBox Grid.Column="0" Grid.Row="0"
+                                      Name ="CheckBox9"
+                                      Checked="ToggleButton_OnChecked"
+                                      Unchecked="ToggleButton_OnUnchecked"
+                                      IsChecked="{Binding Step.IsT9}">
+                                <TextBox Classes="h">t₉</TextBox>
+                            </CheckBox>
+
+                            <TextBox Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3"
+                                     Margin="15, 10, 15, 15"
+                                     Classes="h"
+                                     Text="{x:Static timeCalc:Step03.T9}"/>
+
+                            <TextBlock Grid.Column="0" Grid.Row="3" Margin="10" TextWrapping="Wrap" Text="k_нов"/>
+                            <TextBlock Grid.Column="1" Grid.Row="3" Margin="10" TextWrapping="Wrap" Text="Коэффициент новизны работы:"/>
+                            <ComboBox Grid.Column="2" Grid.Row="3"
+                                      VerticalAlignment="Center"
+                                      Classes="correction" Items="{x:Static timeCalc:Step03.s_Corrections3_6}"
+                                      SelectedItem="{Binding Step.K_нов_9}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" ToolTip.Tip="{Binding Coef}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </Grid>
+                    </Border>
+
+                    <!--t10-->
+                    <Border Background="#303030"
+                            BorderBrush="#303030"
+                            Padding="15, 0, 15, 10"
+                            MaxWidth="1000"
+                            HorizontalAlignment="Stretch"
+                            BorderThickness="0"
+                            CornerRadius="10">
+
+                        <Grid DockPanel.Dock="Top"
+                              HorizontalAlignment="Stretch"
+                              ColumnDefinitions="100, *, *, auto"
+                              RowDefinitions="auto, auto, auto, auto, auto, auto, auto, auto, auto">
+
+                            <CheckBox Grid.Column="0" Grid.Row="0"
+                                      Name ="CheckBox10"
+                                      Checked="ToggleButton_OnChecked"
+                                      Unchecked="ToggleButton_OnUnchecked"
+                                      IsChecked="{Binding Step.IsT10}">
+                                <TextBox Classes="h">t₁₀</TextBox>
+                            </CheckBox>
+
+                            <TextBox Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3"
+                                     Margin="15, 10, 15, 15"
+                                     Classes="h"
+                                     Text="{x:Static timeCalc:Step03.T10}"/>
+
+                            <TextBlock Grid.Column="0" Grid.Row="2" Margin="10" TextWrapping="Wrap" Text="k_10"/>
+                            <TextBlock Grid.Column="1" Grid.Row="2" Margin="10" TextWrapping="Wrap" Text="Вид, номенклатура, расположение и масса возимых грузов:"/>
+                            <ComboBox Grid.Column="2" Grid.Row="2"
+                                      VerticalAlignment="Center"
+                                      Classes="correction" Items="{x:Static timeCalc:Step03.s_Corrections3_4_6}"
+                                      SelectedItem="{Binding Step.K10}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" ToolTip.Tip="{Binding Coef}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+
+                            <TextBlock Grid.Column="0" Grid.Row="3" Margin="10" TextWrapping="Wrap" Text="k_нов"/>
+                            <TextBlock Grid.Column="1" Grid.Row="3" Margin="10" TextWrapping="Wrap" Text="Коэффициент новизны работы:"/>
+                            <ComboBox Grid.Column="2" Grid.Row="3"
+                                      VerticalAlignment="Center"
+                                      Classes="correction" Items="{x:Static timeCalc:Step03.s_Corrections3_6}"
+                                      SelectedItem="{Binding Step.K_нов_10}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" ToolTip.Tip="{Binding Coef}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </Grid>
+                    </Border>
+
+                </StackPanel>
+
+            </TabItem>
+
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock>в части борьбы с пожаром и водой</TextBlock>
+                </TabItem.Header>
+
+                <StackPanel Spacing="15">
+                    
+                    <!--t11-->
+                    <Border Background="#303030"
+                            BorderBrush="#303030"
+                            Padding="15, 0, 15, 10"
+                            MaxWidth="1000"
+                            HorizontalAlignment="Stretch"
+                            Margin="0,15,0,0"
+                            BorderThickness="0"
+                            CornerRadius="10">
+
+                        <Grid DockPanel.Dock="Top"
+                              HorizontalAlignment="Stretch"
+                              ColumnDefinitions="100, *, *, auto"
+                              RowDefinitions="auto, auto, auto, auto, auto, auto, auto, auto, auto">
+
+                            <CheckBox Grid.Column="0" Grid.Row="0"
+                                      Name ="CheckBox11"
+                                      Checked="ToggleButton_OnChecked"
+                                      Unchecked="ToggleButton_OnUnchecked"
+                                      IsChecked="{Binding Step.IsT11}">
+                                <TextBox Classes="h">t₁₁</TextBox>
+                            </CheckBox>
+
+                            <TextBox Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3"
+                                     Margin="15, 10, 15, 15"
+                                     Classes="h"
+                                     Text="{x:Static timeCalc:Step03.T11}"/>
+
+                            <TextBlock Grid.Column="0" Grid.Row="1" Margin="10" TextWrapping="Wrap" Text="n_пом"/>
+                            <TextBlock Grid.Column="1" Grid.Row="1" Margin="10" TextWrapping="Wrap" Text="Кол-во корабельных (судовых) помещений:"/>
+                            <NumericUpDown Grid.Column="2" Grid.Row="1" Classes="count" VerticalAlignment="Center" Value="{Binding Step.N_пом }"/>
+
+                            <TextBlock Grid.Column="0" Grid.Row="3" Margin="10" TextWrapping="Wrap" Text="k_нов"/>
+                            <TextBlock Grid.Column="1" Grid.Row="3" Margin="10" TextWrapping="Wrap" Text="Коэффициент новизны работы:"/>
+                            <ComboBox Grid.Column="2" Grid.Row="3"
+                                      VerticalAlignment="Center"
+                                      Classes="correction" Items="{x:Static timeCalc:Step03.s_Corrections3_6}"
+                                      SelectedItem="{Binding Step.K_нов_11}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" ToolTip.Tip="{Binding Coef}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </Grid>
+                    </Border>
+
+                    <!--t12-->
+                    <Border Background="#303030"
+                            BorderBrush="#303030"
+                            Padding="15, 0, 15, 10"
+                            MaxWidth="1000"
+                            HorizontalAlignment="Stretch"
+                            BorderThickness="0"
+                            CornerRadius="10">
+
+                        <Grid DockPanel.Dock="Top"
+                              HorizontalAlignment="Stretch"
+                              ColumnDefinitions="100, *, *, auto"
+                              RowDefinitions="auto, auto, auto, auto, auto, auto, auto, auto, auto">
+
+                            <CheckBox Grid.Column="0" Grid.Row="0"
+                                      Name ="CheckBox12"
+                                      Checked="ToggleButton_OnChecked"
+                                      Unchecked="ToggleButton_OnUnchecked"
+                                      IsChecked="{Binding Step.IsT12}">
+                                <TextBox Classes="h">t₁₂</TextBox>
+                            </CheckBox>
+
+                            <TextBox Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3"
+                                     Margin="15, 10, 15, 15"
+                                     Classes="h"
+                                     Text="{x:Static timeCalc:Step03.T12}"/>
+
+                            <TextBlock Grid.Column="0" Grid.Row="1" Margin="10" TextWrapping="Wrap" Text="n_АУ"/>
+                            <TextBlock Grid.Column="1" Grid.Row="1" Margin="10" TextWrapping="Wrap" Text="Кол-во АУ:"/>
+                            <NumericUpDown Grid.Column="2" Grid.Row="1" Classes="count" VerticalAlignment="Center" Value="{Binding Step.N_АУ }"/>
+
+                            <TextBlock Grid.Column="0" Grid.Row="3" Margin="10" TextWrapping="Wrap" Text="k_нов"/>
+                            <TextBlock Grid.Column="1" Grid.Row="3" Margin="10" TextWrapping="Wrap" Text="Коэффициент новизны работы:"/>
+                            <ComboBox Grid.Column="2" Grid.Row="3"
+                                      VerticalAlignment="Center"
+                                      Classes="correction" Items="{x:Static timeCalc:Step03.s_Corrections3_6}"
+                                      SelectedItem="{Binding Step.K_нов_12}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" ToolTip.Tip="{Binding Coef}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </Grid>
+                    </Border>
+
+                    <!--t13-->
+                    <Border Background="#303030"
+                            BorderBrush="#303030"
+                            Padding="15, 0, 15, 10"
+                            MaxWidth="1000"
+                            HorizontalAlignment="Stretch"
+                            BorderThickness="0"
+                            CornerRadius="10">
+
+                        <Grid DockPanel.Dock="Top"
+                              HorizontalAlignment="Stretch"
+                              ColumnDefinitions="100, *, *, auto"
+                              RowDefinitions="auto, auto, auto, auto, auto, auto, auto, auto, auto">
+
+                            <CheckBox Grid.Column="0" Grid.Row="0"
+                                      Name ="CheckBox13"
+                                      Checked="ToggleButton_OnChecked"
+                                      Unchecked="ToggleButton_OnUnchecked"
+                                      IsChecked="{Binding Step.IsT13}">
+                                <TextBox Classes="h">t₁₃</TextBox>
+                            </CheckBox>
+
+                            <TextBox Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3"
+                                     Margin="15, 10, 15, 15"
+                                     Classes="h"
+                                     Text="{x:Static timeCalc:Step03.T13}"/>
+
+                            <TextBlock Grid.Column="0" Grid.Row="3" Margin="10" TextWrapping="Wrap" Text="k_нов"/>
+                            <TextBlock Grid.Column="1" Grid.Row="3" Margin="10" TextWrapping="Wrap" Text="Коэффициент новизны работы:"/>
+                            <ComboBox Grid.Column="2" Grid.Row="3"
+                                      VerticalAlignment="Center"
+                                      Classes="correction" Items="{x:Static timeCalc:Step03.s_Corrections3_6}"
+                                      SelectedItem="{Binding Step.K_нов_13}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" ToolTip.Tip="{Binding Coef}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </Grid>
+                    </Border>
+
+                    <!--t14-->
+                    <Border Background="#303030"
+                            BorderBrush="#303030"
+                            Padding="15, 0, 15, 10"
+                            MaxWidth="1000"
+                            HorizontalAlignment="Stretch"
+                            BorderThickness="0"
+                            CornerRadius="10">
+
+                        <Grid DockPanel.Dock="Top"
+                              HorizontalAlignment="Stretch"
+                              ColumnDefinitions="100, *, *, auto"
+                              RowDefinitions="auto, auto, auto, auto, auto, auto, auto, auto, auto">
+
+                            <CheckBox Grid.Column="0" Grid.Row="0"
+                                      Name ="CheckBox14"
+                                      Checked="ToggleButton_OnChecked"
+                                      Unchecked="ToggleButton_OnUnchecked"
+                                      IsChecked="{Binding Step.IsT14}">
+                                <TextBox Classes="h">t₁₄</TextBox>
+                            </CheckBox>
+
+                            <TextBox Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3"
+                                     Margin="15, 10, 15, 15"
+                                     Classes="h"
+                                     Text="{x:Static timeCalc:Step03.T14}"/>
+
+                            <TextBlock Grid.Column="0" Grid.Row="3" Margin="10" TextWrapping="Wrap" Text="k_нов"/>
+                            <TextBlock Grid.Column="1" Grid.Row="3" Margin="10" TextWrapping="Wrap" Text="Коэффициент новизны работы:"/>
+                            <ComboBox Grid.Column="2" Grid.Row="3"
+                                      VerticalAlignment="Center"
+                                      Classes="correction" Items="{x:Static timeCalc:Step03.s_Corrections3_6}"
+                                      SelectedItem="{Binding Step.K_нов_14}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" ToolTip.Tip="{Binding Coef}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </Grid>
+                    </Border>
+
+                    <!--t15-->
+                    <Border Background="#303030"
+                        BorderBrush="#303030"
+                        Padding="15, 0, 15, 10"
+                        MaxWidth="1000"
+                        HorizontalAlignment="Stretch"
+                        BorderThickness="0"
+                        CornerRadius="10">
+
+                        <Grid DockPanel.Dock="Top"
+                              HorizontalAlignment="Stretch"
+                              ColumnDefinitions="100, *, *, auto"
+                              RowDefinitions="auto, auto, auto, auto, auto, auto, auto, auto, auto">
+
+                            <CheckBox Grid.Column="0" Grid.Row="0"
+                                      Name ="CheckBox15"
+                                      Checked="ToggleButton_OnChecked"
+                                      Unchecked="ToggleButton_OnUnchecked"
+                                      IsChecked="{Binding Step.IsT15}">
+                                <TextBox Classes="h">t₁₅</TextBox>
+                            </CheckBox>
+
+                            <TextBox Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3"
+                                     Margin="15, 10, 15, 15"
+                                     Classes="h"
+                                     Text="{x:Static timeCalc:Step03.T15}"/>
+
+                            <TextBlock Grid.Column="0" Grid.Row="3" Margin="10" TextWrapping="Wrap" Text="k_нов"/>
+                            <TextBlock Grid.Column="1" Grid.Row="3" Margin="10" TextWrapping="Wrap" Text="Коэффициент новизны работы:"/>
+                            <ComboBox Grid.Column="2" Grid.Row="3"
+                                      VerticalAlignment="Center"
+                                      Classes="correction" Items="{x:Static timeCalc:Step03.s_Corrections3_6}"
+                                      SelectedItem="{Binding Step.K_нов_15}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" ToolTip.Tip="{Binding Coef}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </Grid>
+                    </Border>
+
+                    <!--t16-->
+                    <Border Background="#303030"
+                            BorderBrush="#303030"
+                            Padding="15, 0, 15, 10"
+                            MaxWidth="1000"
+                            HorizontalAlignment="Stretch"
+                            BorderThickness="0"
+                            CornerRadius="10">
+
+                        <Grid DockPanel.Dock="Top"
+                              HorizontalAlignment="Stretch"
+                              ColumnDefinitions="100, *, *, auto"
+                              RowDefinitions="auto, auto, auto, auto, auto, auto, auto, auto, auto">
+
+                            <CheckBox Grid.Column="0" Grid.Row="0"
+                                      Name ="CheckBox16"
+                                      Checked="ToggleButton_OnChecked"
+                                      Unchecked="ToggleButton_OnUnchecked"
+                                      IsChecked="{Binding Step.IsT16}">
+                                <TextBox Classes="h">t₁₆</TextBox>
+                            </CheckBox>
+
+                            <TextBox Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3"
+                                     Margin="15, 10, 15, 15"
+                                     Classes="h"
+                                     Text="{x:Static timeCalc:Step03.T16}"/>
+
+                            <TextBlock Grid.Column="0" Grid.Row="3" Margin="10" TextWrapping="Wrap" Text="k_нов"/>
+                            <TextBlock Grid.Column="1" Grid.Row="3" Margin="10" TextWrapping="Wrap" Text="Коэффициент новизны работы:"/>
+                            <ComboBox Grid.Column="2" Grid.Row="3"
+                                      VerticalAlignment="Center"
+                                      Classes="correction" Items="{x:Static timeCalc:Step03.s_Corrections3_6}"
+                                      SelectedItem="{Binding Step.K_нов_16}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" ToolTip.Tip="{Binding Coef}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </Grid>
+                    </Border>
+
+                    <!--t17-->
+                    <Border Background="#303030"
+                            BorderBrush="#303030"
+                            Padding="15, 0, 15, 10"
+                            MaxWidth="1000"
+                            HorizontalAlignment="Stretch"
+                            BorderThickness="0"
+                            CornerRadius="10">
+
+                        <Grid DockPanel.Dock="Top"
+                              HorizontalAlignment="Stretch"
+                              ColumnDefinitions="100, *, *, auto"
+                              RowDefinitions="auto, auto, auto, auto, auto, auto, auto, auto, auto">
+
+                            <CheckBox Grid.Column="0" Grid.Row="0"
+                                      Name ="CheckBox17"
+                                      Checked="ToggleButton_OnChecked"
+                                      Unchecked="ToggleButton_OnUnchecked"
+                                      IsChecked="{Binding Step.IsT17}">
+                                <TextBox Classes="h">t₁₇</TextBox>
+                            </CheckBox>
+
+                            <TextBox Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3"
+                                     Margin="15, 10, 15, 15"
+                                     Classes="h"
+                                     Text="{x:Static timeCalc:Step03.T17}"/>
+
+                            <TextBlock Grid.Column="0" Grid.Row="3" Margin="10" TextWrapping="Wrap" Text="k_нов"/>
+                            <TextBlock Grid.Column="1" Grid.Row="3" Margin="10" TextWrapping="Wrap" Text="Коэффициент новизны работы:"/>
+                            <ComboBox Grid.Column="2" Grid.Row="3"
+                                      VerticalAlignment="Center"
+                                      Classes="correction" Items="{x:Static timeCalc:Step03.s_Corrections3_6}"
+                                      SelectedItem="{Binding Step.K_нов_17}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" ToolTip.Tip="{Binding Coef}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </Grid>
+                    </Border>
+
+                    <!--t18-->
+                    <Border Background="#303030"
+                            BorderBrush="#303030"
+                            Padding="15, 0, 15, 10"
+                            MaxWidth="1000"
+                            HorizontalAlignment="Stretch"
+                            BorderThickness="0"
+                            CornerRadius="10">
+
+                        <Grid DockPanel.Dock="Top"
+                              HorizontalAlignment="Stretch"
+                              ColumnDefinitions="100, *, *, auto"
+                              RowDefinitions="auto, auto, auto, auto, auto, auto, auto, auto, auto">
+
+                            <CheckBox Grid.Column="0" Grid.Row="0"
+                                      Name ="CheckBox18"
+                                      Checked="ToggleButton_OnChecked"
+                                      Unchecked="ToggleButton_OnUnchecked"
+                                      IsChecked="{Binding Step.IsT18}">
+                                <TextBox Classes="h">t₁₈</TextBox>
+                            </CheckBox>
+
+                            <TextBox Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3"
+                                     Margin="15, 10, 15, 15"
+                                     Classes="h"
+                                     Text="{x:Static timeCalc:Step03.T18}"/>
+
+                            <TextBlock Grid.Column="0" Grid.Row="3" Margin="10" TextWrapping="Wrap" Text="k_нов"/>
+                            <TextBlock Grid.Column="1" Grid.Row="3" Margin="10" TextWrapping="Wrap" Text="Коэффициент новизны работы:"/>
+                            <ComboBox Grid.Column="2" Grid.Row="3"
+                                      VerticalAlignment="Center"
+                                      Classes="correction" Items="{x:Static timeCalc:Step03.s_Corrections3_6}"
+                                      SelectedItem="{Binding Step.K_нов_18}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" ToolTip.Tip="{Binding Coef}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </Grid>
+                    </Border>
+
+                    <!--t19-->
+                    <Border Background="#303030"
+                            BorderBrush="#303030"
+                            Padding="15, 0, 15, 10"
+                            MaxWidth="1000"
+                            HorizontalAlignment="Stretch"
+                            Margin="0,15,0,0"
+                            BorderThickness="0"
+                            CornerRadius="10">
+
+                        <Grid DockPanel.Dock="Top"
+                              HorizontalAlignment="Stretch"
+                              ColumnDefinitions="100, *, *, auto"
+                              RowDefinitions="auto, auto, auto, auto, auto, auto, auto, auto, auto">
+
+                            <CheckBox Grid.Column="0" Grid.Row="0"
+                                      Name ="CheckBox19"
+                                      Checked="ToggleButton_OnChecked"
+                                      Unchecked="ToggleButton_OnUnchecked"
+                                      IsChecked="{Binding Step.IsT19}">
+                                <TextBox Classes="h">t₁₉</TextBox>
+                            </CheckBox>
+
+                            <TextBox Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3"
+                                     Margin="15, 10, 15, 15"
+                                     Classes="h"
+                                     Text="{x:Static timeCalc:Step03.T19}"/>
+
+                            <TextBlock Grid.Column="0" Grid.Row="1" Margin="10" TextWrapping="Wrap" Text="n_пом"/>
+                            <TextBlock Grid.Column="1" Grid.Row="1" Margin="10" TextWrapping="Wrap" Text="Кол-во ОКС, используемых в СПО СИП БЖ для задач информационной поддержки:"/>
+                            <NumericUpDown Grid.Column="2" Grid.Row="1" Classes="count" VerticalAlignment="Center" Value="{Binding Step.N_ОКС }"/>
+
+                            <TextBlock Grid.Column="0" Grid.Row="3" Margin="10" TextWrapping="Wrap" Text="k_нов"/>
+                            <TextBlock Grid.Column="1" Grid.Row="3" Margin="10" TextWrapping="Wrap" Text="Коэффициент новизны работы:"/>
+                            <ComboBox Grid.Column="2" Grid.Row="3"
+                                      VerticalAlignment="Center"
+                                      Classes="correction" Items="{x:Static timeCalc:Step03.s_Corrections3_6}"
+                                      SelectedItem="{Binding Step.K_нов_19}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" ToolTip.Tip="{Binding Coef}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </Grid>
+                    </Border>
+
+                    <!--t20-->
+                    <Border Background="#303030"
+                            BorderBrush="#303030"
+                            Padding="15, 0, 15, 10"
+                            MaxWidth="1000"
+                            HorizontalAlignment="Stretch"
+                            BorderThickness="0"
+                            CornerRadius="10">
+
+                        <Grid DockPanel.Dock="Top"
+                              HorizontalAlignment="Stretch"
+                              ColumnDefinitions="100, *, *, auto"
+                              RowDefinitions="auto, auto, auto, auto, auto, auto, auto, auto, auto">
+
+                            <CheckBox Grid.Column="0" Grid.Row="0"
+                                      Name ="CheckBox20"
+                                      Checked="ToggleButton_OnChecked"
+                                      Unchecked="ToggleButton_OnUnchecked"
+                                      IsChecked="{Binding Step.IsT20}">
+                                <TextBox Classes="h">t₂₀</TextBox>
+                            </CheckBox>
+
+                            <TextBox Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3"
+                                     Margin="15, 10, 15, 15"
+                                     Classes="h"
+                                     Text="{x:Static timeCalc:Step03.T20}"/>
+
+                            <TextBlock Grid.Column="0" Grid.Row="3" Margin="10" TextWrapping="Wrap" Text="k_нов"/>
+                            <TextBlock Grid.Column="1" Grid.Row="3" Margin="10" TextWrapping="Wrap" Text="Коэффициент новизны работы:"/>
+                            <ComboBox Grid.Column="2" Grid.Row="3"
+                                      VerticalAlignment="Center"
+                                      Classes="correction" Items="{x:Static timeCalc:Step03.s_Corrections3_6}"
+                                      SelectedItem="{Binding Step.K_нов_20}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" ToolTip.Tip="{Binding Coef}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </Grid>
+                    </Border>
+
+                    <!--t21-->
+                    <Border Background="#303030"
+                            BorderBrush="#303030"
+                            Padding="15, 0, 15, 10"
+                            MaxWidth="1000"
+                            HorizontalAlignment="Stretch"
+                            BorderThickness="0"
+                            CornerRadius="10">
+
+                        <Grid DockPanel.Dock="Top"
+                              HorizontalAlignment="Stretch"
+                              ColumnDefinitions="100, *, *, auto"
+                              RowDefinitions="auto, auto, auto, auto, auto, auto, auto, auto, auto">
+
+                            <CheckBox Grid.Column="0" Grid.Row="0"
+                                      Name ="CheckBox21"
+                                      Checked="ToggleButton_OnChecked"
+                                      Unchecked="ToggleButton_OnUnchecked"
+                                      IsChecked="{Binding Step.IsT21}">
+                                <TextBox Classes="h">t₂₁</TextBox>
+                            </CheckBox>
+
+                            <TextBox Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3"
+                                     Margin="15, 10, 15, 15"
+                                     Classes="h"
+                                     Text="{x:Static timeCalc:Step03.T21}"/>
+
+                            <TextBlock Grid.Column="0" Grid.Row="3" Margin="10" TextWrapping="Wrap" Text="k_нов"/>
+                            <TextBlock Grid.Column="1" Grid.Row="3" Margin="10" TextWrapping="Wrap" Text="Коэффициент новизны работы:"/>
+                            <ComboBox Grid.Column="2" Grid.Row="3"
+                                      VerticalAlignment="Center"
+                                      Classes="correction" Items="{x:Static timeCalc:Step03.s_Corrections3_6}"
+                                      SelectedItem="{Binding Step.K_нов_21}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" ToolTip.Tip="{Binding Coef}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </Grid>
+                    </Border>
+
+                    <!--t22-->
+                    <Border Background="#303030"
+                            BorderBrush="#303030"
+                            Padding="15, 0, 15, 10"
+                            MaxWidth="1000"
+                            HorizontalAlignment="Stretch"
+                            BorderThickness="0"
+                            CornerRadius="10">
+
+                        <Grid DockPanel.Dock="Top"
+                              HorizontalAlignment="Stretch"
+                              ColumnDefinitions="100, *, *, auto"
+                              RowDefinitions="auto, auto, auto, auto, auto, auto, auto, auto, auto">
+
+                            <CheckBox Grid.Column="0" Grid.Row="0"
+                                      Name ="CheckBox22"
+                                      Checked="ToggleButton_OnChecked"
+                                      Unchecked="ToggleButton_OnUnchecked"
+                                      IsChecked="{Binding Step.IsT22}">
+                                <TextBox Classes="h">t₂₂</TextBox>
+                            </CheckBox>
+
+                            <TextBox Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3"
+                                     Margin="15, 10, 15, 15"
+                                     Classes="h"
+                                     Text="{x:Static timeCalc:Step03.T22}"/>
+
+                            <TextBlock Grid.Column="0" Grid.Row="3" Margin="10" TextWrapping="Wrap" Text="k_нов"/>
+                            <TextBlock Grid.Column="1" Grid.Row="3" Margin="10" TextWrapping="Wrap" Text="Коэффициент новизны работы:"/>
+                            <ComboBox Grid.Column="2" Grid.Row="3"
+                                      VerticalAlignment="Center"
+                                      Classes="correction" Items="{x:Static timeCalc:Step03.s_Corrections3_6}"
+                                      SelectedItem="{Binding Step.K_нов_22}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" ToolTip.Tip="{Binding Coef}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </Grid>
+                    </Border>
+
+                    <!--t23-->
+                    <Border Background="#303030"
+                            BorderBrush="#303030"
+                            Padding="15, 0, 15, 10"
+                            MaxWidth="1000"
+                            HorizontalAlignment="Stretch"
+                            BorderThickness="0"
+                            CornerRadius="10">
+
+                        <Grid DockPanel.Dock="Top"
+                              HorizontalAlignment="Stretch"
+                              ColumnDefinitions="100, *, *, auto"
+                              RowDefinitions="auto, auto, auto, auto, auto, auto, auto, auto, auto">
+
+                            <CheckBox Grid.Column="0" Grid.Row="0"
+                                      Name ="CheckBox23"
+                                      Checked="ToggleButton_OnChecked"
+                                      Unchecked="ToggleButton_OnUnchecked"
+                                      IsChecked="{Binding Step.IsT23}">
+                                <TextBox Classes="h">t₂₃</TextBox>
+                            </CheckBox>
+
+                            <TextBox Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3"
+                                     Margin="15, 10, 15, 15"
+                                     Classes="h"
+                                     Text="{x:Static timeCalc:Step03.T23}"/>
+
+                            <TextBlock Grid.Column="0" Grid.Row="3" Margin="10" TextWrapping="Wrap" Text="k_нов"/>
+                            <TextBlock Grid.Column="1" Grid.Row="3" Margin="10" TextWrapping="Wrap" Text="Коэффициент новизны работы:"/>
+                            <ComboBox Grid.Column="2" Grid.Row="3"
+                                      VerticalAlignment="Center"
+                                      Classes="correction" Items="{x:Static timeCalc:Step03.s_Corrections3_6}"
+                                      SelectedItem="{Binding Step.K_нов_23}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" ToolTip.Tip="{Binding Coef}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </Grid>
+                    </Border>
+
+                    <!--t24-->
+                    <Border Background="#303030"
+                            BorderBrush="#303030"
+                            Padding="15, 0, 15, 10"
+                            MaxWidth="1000"
+                            HorizontalAlignment="Stretch"
+                            BorderThickness="0"
+                            CornerRadius="10">
+
+                        <Grid DockPanel.Dock="Top"
+                              HorizontalAlignment="Stretch"
+                              ColumnDefinitions="100, *, *, auto"
+                              RowDefinitions="auto, auto, auto, auto, auto, auto, auto, auto, auto">
+
+                            <CheckBox Grid.Column="0" Grid.Row="0"
+                                      Name ="CheckBox24"
+                                      Checked="ToggleButton_OnChecked"
+                                      Unchecked="ToggleButton_OnUnchecked"
+                                      IsChecked="{Binding Step.IsT24}">
+                                <TextBox Classes="h">t₂₄</TextBox>
+                            </CheckBox>
+
+                            <TextBox Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3"
+                                     Margin="15, 10, 15, 15"
+                                     Classes="h"
+                                     Text="{x:Static timeCalc:Step03.T24}"/>
+
+                            <TextBlock Grid.Column="0" Grid.Row="3" Margin="10" TextWrapping="Wrap" Text="k_нов"/>
+                            <TextBlock Grid.Column="1" Grid.Row="3" Margin="10" TextWrapping="Wrap" Text="Коэффициент новизны работы:"/>
+                            <ComboBox Grid.Column="2" Grid.Row="3"
+                                      VerticalAlignment="Center"
+                                      Classes="correction" Items="{x:Static timeCalc:Step03.s_Corrections3_6}"
+                                      SelectedItem="{Binding Step.K_нов_24}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" ToolTip.Tip="{Binding Coef}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </Grid>
+                    </Border>
+
+                    <!--t25-->
+                    <Border Background="#303030"
+                            BorderBrush="#303030"
+                            Padding="15, 0, 15, 10"
+                            MaxWidth="1000"
+                            HorizontalAlignment="Stretch"
+                            BorderThickness="0"
+                            CornerRadius="10">
+
+                        <Grid DockPanel.Dock="Top"
+                              HorizontalAlignment="Stretch"
+                              ColumnDefinitions="100, *, *, auto"
+                              RowDefinitions="auto, auto, auto, auto, auto, auto, auto, auto, auto">
+
+                            <CheckBox Grid.Column="0" Grid.Row="0"
+                                      Name ="CheckBox25"
+                                      Checked="ToggleButton_OnChecked"
+                                      Unchecked="ToggleButton_OnUnchecked"
+                                      IsChecked="{Binding Step.IsT25}">
+                                <TextBox Classes="h">t₂₅</TextBox>
+                            </CheckBox>
+
+                            <TextBox Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3"
+                                     Margin="15, 10, 15, 15"
+                                     Classes="h"
+                                     Text="{x:Static timeCalc:Step03.T25}"/>
+
+                            <TextBlock Grid.Column="0" Grid.Row="1" Margin="10" TextWrapping="Wrap" Text="n_АК"/>
+                            <TextBlock Grid.Column="1" Grid.Row="1" Margin="10" TextWrapping="Wrap" Text="Кол-во аварийных контуров АК:"/>
+                            <NumericUpDown Grid.Column="2" Grid.Row="1" Classes="count" VerticalAlignment="Center" Value="{Binding Step.N_АК }"/>
+
+                            <TextBlock Grid.Column="0" Grid.Row="3" Margin="10" TextWrapping="Wrap" Text="k_нов"/>
+                            <TextBlock Grid.Column="1" Grid.Row="3" Margin="10" TextWrapping="Wrap" Text="Коэффициент новизны работы:"/>
+                            <ComboBox Grid.Column="2" Grid.Row="3"
+                                      VerticalAlignment="Center"
+                                      Classes="correction" Items="{x:Static timeCalc:Step03.s_Corrections3_6}"
+                                      SelectedItem="{Binding Step.K_нов_25}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" ToolTip.Tip="{Binding Coef}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </Grid>
+                    </Border>
+
+
+
+                </StackPanel>
+
+            </TabItem>
+
+        </TabControl>
+
+        <StackPanel DockPanel.Dock="Bottom" 
+                    HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                    Margin="20">
+            <Button Classes="cancel" Command="{Binding DeleteStepCmd}" Content="Удалить этап"/>
+        </StackPanel>
+
+    </DockPanel>
+</UserControl>

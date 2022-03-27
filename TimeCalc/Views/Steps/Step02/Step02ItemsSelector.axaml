@@ -1,0 +1,55 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:timeCalc="clr-namespace:TimeCalc"
+        mc:Ignorable="d" d:DesignWidth="720" d:DesignHeight="580" Width="720" Height="580"
+        WindowStartupLocation="CenterOwner"
+        x:Class="TimeCalc.Views.Step02ItemsSelector"
+        Title="{Binding TableModel.Name}">
+
+
+    <StackPanel Margin="20" Background="Transparent">
+
+        <Button Classes="add"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                Margin="10, 0, 0, 10"
+                Name ="CreateNewDoc"
+                Click="CreateSubstep">
+            Создать документ
+        </Button>
+
+        <DataGrid Classes="common"
+                  Name="DgvSteps"
+                  Margin="10, 0, 10, 10">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Наименование работы" Width="*" MinWidth="300">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Classes="read l"
+                                     HorizontalAlignment="Stretch"
+                                     Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="Добавить" Width="auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox HorizontalAlignment="Center" Click="ToggleItemClick"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!--<Button Background="Goldenrod"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                Margin="0, 30, 0, 10"
+                Click="AddSubstep">
+            Создать документ
+        </Button>-->
+    </StackPanel>
+</Window>

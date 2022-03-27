@@ -1,0 +1,112 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="250"
+             xmlns:viewModels="clr-namespace:TimeCalc.ViewModels"
+             xmlns:timeCalc="clr-namespace:TimeCalc"
+             x:Class="TimeCalc.Views.Step02Table">
+
+    <Design.DataContext> <viewModels:Step02TableViewModel/> </Design.DataContext>
+    <UserControl.DataContext><viewModels:Step02TableViewModel/></UserControl.DataContext>
+
+    <Border Background="#303030"
+            BorderBrush="#303030"
+            Padding="15, 0, 15, 0"
+            BorderThickness="0"
+            CornerRadius="10">
+
+        <DockPanel>
+
+            <Grid DockPanel.Dock="Top" ColumnDefinitions="auto, *, auto">
+
+                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                    <Button Margin="0,10,0,0"
+                            Command="{ Binding MoveUpCmd }">
+                        <PathIcon Data="{StaticResource chevron_up_regular}"/>
+                    </Button>
+
+                    <Button Margin="10,10,10,0"
+                            Command="{ Binding MoveDownCmd }">
+                        <PathIcon Data="{StaticResource chevron_down_regular}"/>
+                    </Button>
+                </StackPanel>
+
+                <TextBox Grid.Column="1"
+                    Name="Name"
+                    Margin="0, 20, 0, 10"
+                    FontSize="16"
+                    FontWeight="SemiLight"
+                    Watermark="Название этапа"
+                    Text="{ Binding TableModel.Name }"/>
+
+                <StackPanel Grid.Column="2" Orientation="Horizontal">
+                    <Button Margin="10,10,0,0"
+                            Command="{ Binding EditSubstepsCmd }"
+                            CommandParameter="{Binding $parent[Window] }">
+                        <PathIcon Data="{StaticResource text_bullet_list_regular}"/>
+                    </Button>
+
+                    <Button Margin="10,10,0,0"
+                            Command="{ Binding RemoveSubstepCmd }">
+                        <PathIcon Data="{StaticResource delete_regular}"/>
+                    </Button>
+                </StackPanel>
+
+            </Grid>
+
+            <DataGrid Classes="common" 
+                      DockPanel.Dock="Top"
+                      VerticalAlignment="Stretch"
+                      Margin="0, 0, 0, 20"
+                      Name="DgvSubsteps"
+                      Items="{ Binding TableModel.TableItems }">
+
+                <DataGrid.Columns>
+
+                    <DataGridTemplateColumn Header="Наименование работы" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Classes="read l"
+                                         HorizontalAlignment="Stretch"
+                                         Text="{Binding Name}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="Единица измерения" Width="auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Classes="read" Text="{Binding Measure}"/>            
+                                </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="Объем работы" Width="auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <NumericUpDown Classes="count" Value="{Binding Quantity}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="Степень коррекции" Width="auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <ComboBox Classes="correction" Items="{x:Static timeCalc:Step02.s_Corrections2_9}" 
+                                          SelectedItem="{Binding Correction}">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Name}" ToolTip.Tip="{Binding Coef}"/>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                </DataGrid.Columns>
+            </DataGrid>
+        </DockPanel>
+    </Border>
+</UserControl>

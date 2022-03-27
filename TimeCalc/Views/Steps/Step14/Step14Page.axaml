@@ -1,0 +1,54 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:timeCalc="clr-namespace:TimeCalc"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="TimeCalc.Views.Steps14Page">
+
+    <DockPanel Margin="{StaticResource PageMargin}" Background="Transparent">
+
+        <DataGrid Classes="common"
+                  DockPanel.Dock="Top"
+                  VerticalAlignment="Stretch"
+                  Margin="0, 0, 0, 20"
+                  Items="{ Binding Step.T_14_1.TableItems }">
+
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Наименование работы" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Classes="read l"
+                                     HorizontalAlignment="Stretch"
+                                     Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="Единица измерения" Width="auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Classes="read" Text="{Binding Measure}"
+                                     ToolTip.Tip="{Binding Norm }"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="Объем работы" Width="auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <NumericUpDown Classes="count" Value="{Binding Quantity}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Orientation="Horizontal" Spacing="30"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom">
+            <Button Classes="cancel" Command="{Binding DeleteStepCmd}" Content="Удалить этап"/>
+        </StackPanel>
+        
+    </DockPanel>
+</UserControl>

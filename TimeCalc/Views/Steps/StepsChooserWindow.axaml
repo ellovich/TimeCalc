@@ -1,0 +1,60 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:TimeCalc.ViewModels"
+        mc:Ignorable="d" d:DesignWidth="700" d:DesignHeight="240"
+        
+        Width="700" Height="240"
+        WindowStartupLocation="CenterScreen"
+        x:Class="TimeCalc.Views.StepsChooserWindow"
+        x:Name="StepsChooserWindow"
+        ShowInTaskbar="False"
+        Title="Добавление этапа">
+    <Design.DataContext><viewModels:StepsChooserWindowViewModel/></Design.DataContext>
+    <Window.DataContext><viewModels:StepsChooserWindowViewModel/></Window.DataContext>
+
+    <StackPanel>
+
+        <ComboBox Name="StepTemplatesComboBox"
+                  Margin="40, 40, 40, 10"
+                  HorizontalAlignment="Stretch"
+                  SelectedItem="{Binding SelectedStepTemplate }"
+                  SelectionChanged="StepTemplatesComboBox_OnSelectionChanged">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBox Text="{Binding [1] }"
+                             Watermark="Шаблон этапа"
+                             ToolTip.Tip="{Binding [0]}"
+                             TextWrapping="Wrap"
+                             BorderThickness="0"
+                             IsHitTestVisible="False"
+                             Margin="-10, -3, 0, -8"
+                             Height="{Binding $parent.Height }"
+                             Background="Transparent"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+
+        <TextBox Name="StepNameTextBox"
+                 Text="{Binding StepEnteredName}"
+                 Margin="40, 10, 40, 40"
+                 Watermark="Название этапа"/>
+
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Spacing="30"
+                    HorizontalAlignment="Center" VerticalAlignment="Bottom">
+
+            <Button Classes="cancel" Name="CancelBtn" 
+                    Content="Отменить" 
+                    Command="{Binding CancelCmd}"
+                    CommandParameter="{ Binding ElementName=StepsChooserWindow}"/>
+
+            <Button Classes="ok" Name="AddStepBtn" 
+                    Content="Добавить" 
+                    Command="{Binding AddStepCmd}"
+                    CommandParameter="{ Binding ElementName=StepsChooserWindow}"/>
+        </StackPanel>
+    </StackPanel>
+
+</Window>
