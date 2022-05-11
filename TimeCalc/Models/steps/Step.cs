@@ -41,11 +41,10 @@ namespace TimeCalc
                 12 => new Step12() { Name = name },
                 13 => new Step13() { Name = name },
                 14 => new Step14() { Name = name },
-                15 => new Step15() { Name = name },
+                15 => new Step16() { Name = name },
                 16 => new Step10() { Name = name },
                 17 => new Step17() { Name = name },
-                18 => new Step18() { Name = name },
-                19 => new Step19() { Name = name },
+                18 => new Step16() { Name = name },
                 _ => throw new Exception("No such ID"),
             };
         }

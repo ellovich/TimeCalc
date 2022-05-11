@@ -66,7 +66,7 @@ namespace TimeCalc
         public int Id => GetHashCode();
         public double MethodicId { get; }
         public string Name { get; set; }
-        [Reactive] public BindingList<Item> TableItems { get; set; }
+        [Reactive] public ObservableCollection<Item> TableItems { get; set; }
         private bool _custom;
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace TimeCalc
             _custom = true;
 
             Name = name;
-            TableItems = new BindingList<Item>(tableItems);
+            TableItems = new ObservableCollection<Item>(tableItems);
             for (int i = 0; i < TableItems.Count; i++)
             {
                 TableItems[i].MethodicId = i + 1;
@@ -100,7 +100,7 @@ namespace TimeCalc
         {
             MethodicId = methodicId;
             Name = name;
-            TableItems = new BindingList<Item>(tableItems);
+            TableItems = new ObservableCollection<Item>(tableItems);
             for (int i = 0; i < TableItems.Count; i++)
             {
                 TableItems[i].MethodicId = i + 1;
@@ -131,11 +131,11 @@ namespace TimeCalc
     <caption>{caption}</caption>
     <tr>
         <th>Название</th>
-        <th>Единица измерения</th>
-        <th>Норма</th>
-        <th>Коэффициент</th>
-        <th>Количество</th>
-        <th>Трудоёмкость</th>
+        <th style=""width:15%"">Единица измерения</th>
+        <th style=""width:10%"">Норма</th>
+        <th style=""width:10%"">Коэффициент</th>
+        <th style=""width:10%"">Количество</th>
+        <th style=""width:10%"">Трудоёмкость</th>
     </tr>
     {string.Join("\n", SelectedItems.Select(i => i.ToHtml()))}
 </table>

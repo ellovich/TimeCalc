@@ -38,17 +38,16 @@ namespace TimeCalc.ViewModels
                 case 6:  return new Steps06Page(step);
                 case 7:  return new Steps07Page(step);
                 //case 8:  return new Steps08Page(step);
-                //case 9:  return new Steps09Page(step);
+                case 9:  return new Steps09Page(step);
                 //case 10: return new Steps10Page(step);
                 case 11: return new Steps11Page(step);
                 case 12: return new Steps12Page(step);
                 //case 13: return new Steps13Page(step);
                 case 14: return new Steps14Page(step);
                 //case 15: return new Steps15Page(step);
-                //case 16: return new Steps16Page(step);
-                //case 17: return new Steps17Page(step);
-                //case 18: return new Steps18Page(step);
-                //case 19: return new Steps19Page(step);
+                case 16: return new Steps16Page(step);
+                case 17: return new Steps17Page(step);
+                case 18: return new Steps18Page(step);
                 default: throw new Exception();
             }
         }

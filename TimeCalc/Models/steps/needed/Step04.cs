@@ -9,7 +9,7 @@ namespace TimeCalc
 {
     public class Step04 : Step
     {
-        public override double MethodicId => 4;
+        public override double MethodicId => 4; // начиная с 4.6
         public override string MethodicName => "3D моделирование";
 
         public override double CalcLabor()
@@ -30,15 +30,18 @@ namespace TimeCalc
 
         [Reactive] public Надстройки Надстр { get; set; }
 
-        [Reactive] public Correction K_3D_нов { get; set; }  // коэффициент корректировки зависящий от новизны
         [Reactive] public Correction K_L { get; set; }       // сложность разработки в зависимости от наиб. длины корпуса
         [Reactive] public Correction K_1 { get; set; }       // сложность разработки в зависимости сложности геометрии обводов корпуса
         [Reactive] public Correction K_K { get; set; }       // качество конечной модели, опред. низко- или высокополигональным моделированием
+        [Reactive] public Correction K_3D_нов { get; set; }  // коэффициент корректировки зависящий от новизны
+
 
         #region _T_ВВ  (ф.14)
         private double _T_ВВ => _T_корп + _T_надстр + _T_эл; // (ф.14, п.4.6.1, с.45) // внешний вид
 
+
         #region _T_корп   (ф.15)
+
         private double _T_корп => _T_O + _T_ВЧ;              // (ф.15, п.4.6.2, с.45) // корпус
 
         #region _T_O
@@ -70,7 +73,9 @@ namespace TimeCalc
 
         #endregion
 
+
         #region _T_надстр (ф.17)
+
         private double _T_надстр => Надстр.FullLabor();
 
         public class Надстройки
@@ -108,7 +113,9 @@ namespace TimeCalc
 
         #endregion
 
+
         #region _T_эл     (ф.19)
+
         private double _T_эл => (_q_эл_В1 * _n_эл_В2) + (_q_эл_В2 * _n_эл_В2) + (_q_эл_Н1 * _n_эл_Н1 * K_3D_нов.Coef);
 
         private const double _q_эл_В1 = 40; // усред. норма для оборудования очень большого размера с высокой ст. деталировки
@@ -118,9 +125,11 @@ namespace TimeCalc
         private const double _n_эл_В1 = 0;  // кол-во эл-ов оборуд. очень большого размера с высокой ст. деталировки
         private const double _n_эл_В2 = 0;  // кол-во эл-ов оборуд. очень большого размера с низкой  ст. деталировки
         private const double _n_эл_Н1 = 0;  // кол-во эл-ов оборуд.       большого размера с высокой ст. деталировки
+
         #endregion
 
         #endregion
+
 
         #region _T_ВР  (ф.20)
 
@@ -139,9 +148,13 @@ namespace TimeCalc
 
         #endregion
 
+
         #region _T_пом (ф.??)
+
         private double _T_пом => 0; // TODO (ф., п.4.6., с.) // помещения
+
         #endregion
+
 
         #endregion
     }

@@ -70,6 +70,9 @@
     <Compile Update="Views\StartUpWindow.axaml.cs">
       <DependentUpon>StartUpWindow.axaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\Steps\Step09\Step09Page.axaml.cs">
+      <DependentUpon>Step09Page.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Steps\Step11\Step11Page.axaml.cs">
       <DependentUpon>Step11Page.axaml</DependentUpon>
     </Compile>
@@ -78,6 +81,15 @@
     </Compile>
     <Compile Update="Views\Steps\Step14\Step14Page.axaml.cs">
       <DependentUpon>Step14Page.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Steps\Step16\Step16Page.axaml.cs">
+      <DependentUpon>Step16Page.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Steps\Step17\Step17Page.axaml.cs">
+      <DependentUpon>Step17Page.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Steps\Step18\Step18Page.axaml.cs">
+      <DependentUpon>Step18Page.axaml</DependentUpon>
     </Compile>
   </ItemGroup>
   

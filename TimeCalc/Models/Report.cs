@@ -43,6 +43,8 @@ namespace TimeCalc
 
         public static void Show()
         {
+            s_reports.Clear();
+
             foreach (var step in StepsManager.Instance.DoneSteps)
                 step.CreateReport();
 
@@ -51,7 +53,7 @@ namespace TimeCalc
             try
             {
                 using (var sw = new StreamWriter(path, false, System.Text.Encoding.Default))
-                    sw.WriteLine(Generate());
+                    sw.Write(Generate());
 
                 Debug.WriteLine($"Запись выполнена в {path}");
             }

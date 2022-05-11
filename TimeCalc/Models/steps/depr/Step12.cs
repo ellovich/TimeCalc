@@ -23,17 +23,18 @@ namespace TimeCalc
 <h2>{Name}</h2>
 <p>Расчёт этапа производиться в соответствии с пунктом {MethodicId} - {MethodicName}.</p>
 <p>
-    Нормы времени на проведение испытаний рассчитываются по формуле 49: T<sub>об</sub> = k * t + T<sub>д</sub>
+    Нормы времени на проведение испытаний рассчитываются по формуле 57: <br>
+    T<sub>об</sub> = k * t + T<sub>д</sub>
     <br>
-    k = { K } - количество сотрудников, принимающих участие в проведении испытаний; </br>
-    t = { T } - длительность испытаний; </br>
-    Т<sub>д</sub> = { AddedTables.Sum(t => t.FullLabor) } - трудоёмкость изготовления и выпуска перечисленных документов:
+    k = { K } - количество сотрудников, принимающих участие в проведении испытаний </br>
+    t = { T } - длительность испытаний </br>
+    Т<sub>д</sub> = { AddedTables.Sum(t => t.FullLabor) } - трудоёмкость подготовки документации:
 </p>
     {string.Join("\n", AddedTables.Select(t => t.ToHtml()))}
 <p><b>Итого:{Labor.Out()}ч</b></p>
 " + "\n";
 
-            return new Report(25, algo);
+            return new Report(88, algo);
         }
 
         public Step12()
@@ -43,6 +44,7 @@ namespace TimeCalc
                 x => x.T).Subscribe((_) => CalcLabor());
 
             // AddedTables
+            //    .Subscribe((_) => CalcLabor());
         }
 
 
